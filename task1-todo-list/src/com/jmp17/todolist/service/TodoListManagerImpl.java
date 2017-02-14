@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jmp17.todolist.entity.TodoItem;
+import com.jmp17.todolist.exception.DaoException;
 import com.jmp17.todolist.exception.TodoListException;
 import com.jmp17.todolist.persistence.TodoListDao;
+import com.jmp17.todolist.service.operation.Operation;
 import com.jmp17.todolist.service.operation.OperationFactory;
 import com.jmp17.todolist.service.operation.TodoListOperation;
 
@@ -19,7 +21,7 @@ public class TodoListManagerImpl implements TodoListManager {
 		this.dao = dao;
 	}
 	
-	public void init() {
+	public void init() throws DaoException {
 		list = new ArrayList<>();
 				
 		list.addAll(dao.load());
@@ -28,14 +30,15 @@ public class TodoListManagerImpl implements TodoListManager {
 		factory.setList(list);
 	}
 	
-	public void shutdown() {
+	public void shutdown() throws DaoException {
 		dao.persist(list);
 	}
 	
 	@Override
-	public String executeTask(String operation, String... args) throws TodoListException {
+	public String executeTask(String operationKey, String... args) throws TodoListException {
 		
-		TodoListOperation operationObject = factory.getOperation(operation.trim().toLowerCase(), args);
+		Operation operation = Operation.fromString(operationKey.trim());
+		TodoListOperation operationObject = factory.getOperation(operation, args);
 		
 		return operationObject.execute();
 	}
