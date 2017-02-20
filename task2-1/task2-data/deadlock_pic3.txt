@@ -1,0 +1,92 @@
+>jstack 6176
+2017-02-15 18:58:03
+Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.101-b13 mixed mode):
+
+"DestroyJavaVM" #15 prio=5 os_prio=0 tid=0x00000000024f0800 nid=0x1de8 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"thread-5" #14 prio=5 os_prio=0 tid=0x000000001d4e1000 nid=0x23e0 waiting for monitor entry [0x000000001df2f000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+        at com.jmp17.deadlock.entity.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3ee458> (a com.jmp17.deadlock.entity.SharedResource)
+        at com.jmp17.deadlock.entity.ThreadWithLocks.run(ThreadWithLocks.java:20)
+
+"thread-4" #13 prio=5 os_prio=0 tid=0x000000001d4e0000 nid=0x42c waiting for monitor entry [0x000000001de2f000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+        at com.jmp17.deadlock.entity.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3ee458> (a com.jmp17.deadlock.entity.SharedResource)
+        at com.jmp17.deadlock.entity.ThreadWithLocks.run(ThreadWithLocks.java:20)
+
+"thread-3" #12 prio=5 os_prio=0 tid=0x000000001d4df800 nid=0x144c waiting for monitor entry [0x000000001dd2f000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+        at com.jmp17.deadlock.entity.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3ee458> (a com.jmp17.deadlock.entity.SharedResource)
+        at com.jmp17.deadlock.entity.ThreadWithLocks.run(ThreadWithLocks.java:20)
+
+"thread-2" #11 prio=5 os_prio=0 tid=0x000000001d4d9800 nid=0x1a14 waiting for monitor entry [0x000000001dc2e000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+        at com.jmp17.deadlock.entity.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3ee458> (a com.jmp17.deadlock.entity.SharedResource)
+        at com.jmp17.deadlock.entity.ThreadWithLocks.run(ThreadWithLocks.java:20)
+
+"thread-1" #10 prio=5 os_prio=0 tid=0x000000001d4d8800 nid=0x1c08 waiting on condition [0x000000001db2f000]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+        at java.lang.Thread.sleep(Native Method)
+        at com.jmp17.deadlock.run.DeadLocks.wrappedSleep(DeadLocks.java:12)
+        at com.jmp17.deadlock.entity.ThreadWithLocks.takeResources(ThreadWithLocks.java:30)
+        - locked <0x000000076b3ee458> (a com.jmp17.deadlock.entity.SharedResource)
+        at com.jmp17.deadlock.entity.ThreadWithLocks.run(ThreadWithLocks.java:20)
+
+"Service Thread" #9 daemon prio=9 os_prio=0 tid=0x000000001bc2d000 nid=0x12a4 runnable [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"C1 CompilerThread2" #8 daemon prio=9 os_prio=2 tid=0x000000001bbdd000 nid=0x8fc waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"C2 CompilerThread1" #7 daemon prio=9 os_prio=2 tid=0x000000001bbd6000 nid=0x20a0 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"C2 CompilerThread0" #6 daemon prio=9 os_prio=2 tid=0x000000001bbcf000 nid=0x2124 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"Attach Listener" #5 daemon prio=5 os_prio=2 tid=0x000000001bbcd800 nid=0x201c waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"Signal Dispatcher" #4 daemon prio=9 os_prio=2 tid=0x000000001bbcc000 nid=0x1008 runnable [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"Finalizer" #3 daemon prio=8 os_prio=1 tid=0x000000001bbba800 nid=0x1cb8 in Object.wait() [0x000000001cf2e000]
+   java.lang.Thread.State: WAITING (on object monitor)
+        at java.lang.Object.wait(Native Method)
+        - waiting on <0x000000076b388ee0> (a java.lang.ref.ReferenceQueue$Lock)
+        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+        - locked <0x000000076b388ee0> (a java.lang.ref.ReferenceQueue$Lock)
+        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:164)
+        at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:209)
+
+"Reference Handler" #2 daemon prio=10 os_prio=2 tid=0x00000000025df000 nid=0x20d4 in Object.wait() [0x000000001ce2e000]
+   java.lang.Thread.State: WAITING (on object monitor)
+        at java.lang.Object.wait(Native Method)
+        - waiting on <0x000000076b386b50> (a java.lang.ref.Reference$Lock)
+        at java.lang.Object.wait(Object.java:502)
+        at java.lang.ref.Reference.tryHandlePending(Reference.java:191)
+        - locked <0x000000076b386b50> (a java.lang.ref.Reference$Lock)
+        at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:153)
+
+"VM Thread" os_prio=2 tid=0x000000001bb97800 nid=0xacc runnable
+
+"GC task thread#0 (ParallelGC)" os_prio=0 tid=0x0000000002506800 nid=0x16b0 runnable
+
+"GC task thread#1 (ParallelGC)" os_prio=0 tid=0x0000000002508000 nid=0x167c runnable
+
+"GC task thread#2 (ParallelGC)" os_prio=0 tid=0x0000000002509800 nid=0x1c54 runnable
+
+"GC task thread#3 (ParallelGC)" os_prio=0 tid=0x000000000250b000 nid=0x2344 runnable
+
+"VM Periodic Task Thread" os_prio=2 tid=0x000000001d484000 nid=0x1ed8 waiting on condition
+
+JNI global references: 6
+
+
+C:\Program Files\Java\jdk1.8.0_101\bin>
+

@@ -1,0 +1,134 @@
+>jstack 7092
+
+2017-02-20 09:08:27
+Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.101-b13 mixed mode):
+
+"DestroyJavaVM" #14 prio=5 os_prio=0 tid=0x0000000002700800 nid=0x1640 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"thread-4" #13 prio=5 os_prio=0 tid=0x000000001d79d000 nid=0x1794 waiting for monitor entry [0x000000001e11f000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3f0c98> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:31)
+        - locked <0x000000076b3f0d88> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.run(ThreadWithLocks.java:20)
+
+"thread-3" #12 prio=5 os_prio=0 tid=0x000000001d79c000 nid=0x22d0 waiting for monitor entry [0x000000001e01f000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3f0d88> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:31)
+        - locked <0x000000076b3f0d38> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.run(ThreadWithLocks.java:20)
+
+"thread-2" #11 prio=5 os_prio=0 tid=0x000000001d796800 nid=0x2780 waiting for monitor entry [0x000000001df1f000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3f0d38> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:31)
+        - locked <0x000000076b3f0ce8> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.run(ThreadWithLocks.java:20)
+
+"thread-1" #10 prio=5 os_prio=0 tid=0x000000001d795800 nid=0x2120 waiting for monitor entry [0x000000001de1f000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3f0ce8> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:31)
+        - locked <0x000000076b3f0c98> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.run(ThreadWithLocks.java:20)
+
+"Service Thread" #9 daemon prio=9 os_prio=0 tid=0x000000001d724800 nid=0x2228 runnable [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"C1 CompilerThread2" #8 daemon prio=9 os_prio=2 tid=0x000000001be3d800 nid=0x8c4 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"C2 CompilerThread1" #7 daemon prio=9 os_prio=2 tid=0x000000001be3a800 nid=0x1cf4 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"C2 CompilerThread0" #6 daemon prio=9 os_prio=2 tid=0x000000001bddd800 nid=0x20b4 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"Attach Listener" #5 daemon prio=5 os_prio=2 tid=0x000000001bddc000 nid=0x2754 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"Signal Dispatcher" #4 daemon prio=9 os_prio=2 tid=0x000000001bdda800 nid=0x1a18 runnable [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"Finalizer" #3 daemon prio=8 os_prio=1 tid=0x000000001bdc8800 nid=0x640 in Object.wait() [0x000000001d13f000]
+   java.lang.Thread.State: WAITING (on object monitor)
+        at java.lang.Object.wait(Native Method)
+        - waiting on <0x000000076b388ee0> (a java.lang.ref.ReferenceQueue$Lock)
+        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+        - locked <0x000000076b388ee0> (a java.lang.ref.ReferenceQueue$Lock)
+        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:164)
+        at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:209)
+
+"Reference Handler" #2 daemon prio=10 os_prio=2 tid=0x00000000027f1000 nid=0x11c8 in Object.wait() [0x000000001d03f000]
+   java.lang.Thread.State: WAITING (on object monitor)
+        at java.lang.Object.wait(Native Method)
+        - waiting on <0x000000076b386b50> (a java.lang.ref.Reference$Lock)
+        at java.lang.Object.wait(Object.java:502)
+        at java.lang.ref.Reference.tryHandlePending(Reference.java:191)
+        - locked <0x000000076b386b50> (a java.lang.ref.Reference$Lock)
+        at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:153)
+
+"VM Thread" os_prio=2 tid=0x000000001bda7000 nid=0x24f8 runnable
+
+"GC task thread#0 (ParallelGC)" os_prio=0 tid=0x0000000002716800 nid=0x2550 runnable
+
+"GC task thread#1 (ParallelGC)" os_prio=0 tid=0x0000000002718000 nid=0xff8 runnable
+
+"GC task thread#2 (ParallelGC)" os_prio=0 tid=0x0000000002719800 nid=0x23dc runnable
+
+"GC task thread#3 (ParallelGC)" os_prio=0 tid=0x000000000271b000 nid=0x27a8 runnable
+
+"VM Periodic Task Thread" os_prio=2 tid=0x000000001d72b000 nid=0x1a64 waiting on condition
+
+JNI global references: 6
+
+
+Found one Java-level deadlock:
+=============================
+"thread-4":
+  waiting to lock monitor 0x000000001be054f8 (object 0x000000076b3f0c98, a com.jmp17.task2.deadlock.SharedResource),
+  which is held by "thread-1"
+"thread-1":
+  waiting to lock monitor 0x00000000027f5ff8 (object 0x000000076b3f0ce8, a com.jmp17.task2.deadlock.SharedResource),
+  which is held by "thread-2"
+"thread-2":
+  waiting to lock monitor 0x00000000027f9fe8 (object 0x000000076b3f0d38, a com.jmp17.task2.deadlock.SharedResource),
+  which is held by "thread-3"
+"thread-3":
+  waiting to lock monitor 0x000000001be03ef8 (object 0x000000076b3f0d88, a com.jmp17.task2.deadlock.SharedResource),
+  which is held by "thread-4"
+
+Java stack information for the threads listed above:
+===================================================
+"thread-4":
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3f0c98> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:31)
+        - locked <0x000000076b3f0d88> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.run(ThreadWithLocks.java:20)
+"thread-1":
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3f0ce8> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:31)
+        - locked <0x000000076b3f0c98> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.run(ThreadWithLocks.java:20)
+"thread-2":
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3f0d38> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:31)
+        - locked <0x000000076b3f0ce8> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.run(ThreadWithLocks.java:20)
+"thread-3":
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:29)
+        - waiting to lock <0x000000076b3f0d88> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.takeResources(ThreadWithLocks.java:31)
+        - locked <0x000000076b3f0d38> (a com.jmp17.task2.deadlock.SharedResource)
+        at com.jmp17.task2.deadlock.ThreadWithLocks.run(ThreadWithLocks.java:20)
+
+Found 1 deadlock.
